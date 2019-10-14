@@ -1,3 +1,5 @@
+import qualified Data.ByteString.Char8 as Package
+
 ---exercise 1
 --there are multiple ways to implement the 'last' function:
 --way 1
@@ -54,6 +56,22 @@ halve xs =
                       two = drop (length xs `div` 2) xs
 
 --exercise 5
+--encrypts a string by adding an integer to its Unicode value
+--enc :: String -> String
+--returns a pair containing an encrypted string and a function to decrypt it
+--encrypt :: Int -> String -> (String , String -> String)
+
+--exercise 6
+luhnDouble :: Int -> Int
+luhnDouble x
+    | res > 9 = res
+    | otherwise = x
+        where res = x*2 - 9
+luhn :: Int -> Int -> Int -> Int -> Bool
+luhn a b c d 
+    | total `mod` 10 == 0 = True
+    | otherwise = False
+        where total = luhnDouble a + luhnDouble b + luhnDouble c + luhnDouble d
 
 
 
