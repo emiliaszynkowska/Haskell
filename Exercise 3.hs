@@ -8,8 +8,10 @@ longestCommonSubsequence xss
     | length xss == 2 = removeDuplicates (findCommonElements xss)
     | length xss == 1 = head xss
     | otherwise = []
+    
 findCommonElements :: Eq a => [[a]] -> [a]
 findCommonElements [xs,ys] = [x | x <- xs, x <- ys, x `elem` xs, x `elem` ys]
+
 removeDuplicates :: Eq a => [a] -> [a]
 removeDuplicates [] = []
 removeDuplicates (x:xs) = x : removeDuplicates (filter (/= x) xs)
