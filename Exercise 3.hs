@@ -3,15 +3,19 @@ module Exercises (longestCommonSubsequence) where
 --exercise A3
 --when given a list of lists xss, returns the longest subsequence of these lists
 longestCommonSubsequence :: Eq a => [[a]] -> [a]
-longestCommonSubsequence xss 
-    | length xss > 2 = longestCommonSubsequence (findCommonElements(take 2 xss) : (drop 2 xss))
-    | length xss == 2 = removeDuplicates (findCommonElements xss)
-    | length xss == 1 = head xss
-    | otherwise = []
+longestCommonSubsequence [] = []
+longestCommonSubsequence [[]] = []
+longestCommonSubsequence (xs:[]) = xs
+longestCommonSubsequence (xs:ys:xss)
+    | length xss == 0 = findCommonElements xs ys
+    | otherwise = longestCommonSubsequence (findCommonElements xs ys : xss)
     
-findCommonElements :: Eq a => [[a]] -> [a]
-findCommonElements [xs,ys] = [x | x <- xs, x <- ys, x `elem` xs, x `elem` ys]
-
-removeDuplicates :: Eq a => [a] -> [a]
-removeDuplicates [] = []
-removeDuplicates (x:xs) = x : removeDuplicates (filter (/= x) xs)
+findCommonElements :: Eq a => [a] -> [a] -> [a]
+findCommonElements xs [] = []
+findCommonElements [] ys = []
+findCommonElements (x:xs) (y:ys) 
+        | x == y = x : findCommonElements xs ys
+        | length list1 > length list2 = list1
+        | otherwise = list2
+        where list1 = findCommonElements (x:xs) ys
+              list2 = findCommonElements xs (y:ys)
