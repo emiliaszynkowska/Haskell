@@ -1,3 +1,5 @@
+--trees
+
 --creating trees
 data Tree a = Leaf a | Node (Tree a) a (Tree a)
 data ITree a = Leaf | Node a (ITree a) (ITree a)
@@ -25,12 +27,14 @@ goLeft (Node _ l _, ts) = (l, L:ts)
 goRight :: (Tree a, Trail) -> (Tree a, Trail)
 goRight (Node _ _ r, ts) = (r, R:ts)
 
-myTree = Node 5 (Node 4 (Node 2) Node 3)
-myTree -: goLeft 
-
 --zippers
 data Direction a = L a (Tree a) | R a (Tree a)
 type Zipper a = (Tree a, Trail a)
+
+goLeft (Node x l r, ts) = (l, L x r:ts)
+goRight (Node x l r, ts) = (r, R x l:ts)
+goUp (t, L x r : ts) = (Node x t r, ts)
+goUp (t, R x l : ts) = (Node x l t, ts)
 
 modify :: (a → a) → Zipper a → Zipper a   
 modify f (Node x l r, ts) = (Node (f x) l r, ts)   
@@ -39,7 +43,7 @@ modify f (Leaf, ts) = (Leaf, ts)
 attach :: Tree a → Zipper a → Zipper a   
 attach t ( _ , ts) = (t, ts)  
 
-tgoRoot :: Zipper a → Zipper a   
+goRoot :: Zipper a → Zipper a   
 goRoot (t , []) = (t, []) 
 goRoot z = goRoot (goUp z)
 

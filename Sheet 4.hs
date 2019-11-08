@@ -40,17 +40,27 @@ curryy function a b c d = function (a,b) (c,d)
 uncurryy :: (a -> a -> a -> a -> a) -> ((a,a) -> (a,a) -> a)
 uncurryy function (a,b) (c,d) = function a b c d
 
-tupp :: a -> a -> a -> a -> a
-tupp a b c d = a
+tupp1 :: (a,a) -> (a,a) -> a
+tupp1 (a,b) (c,d) = d
+tupp2 :: a -> a -> a -> a -> a
+tupp2 a b c d = a
+
+--exercise 4
+--list generating pattern
+--p = predicate
+--h = adding function
+--t = remainder function
+--x = element
+unfold p h t x 
+    | p x = []
+    | otherwise = h x : unfold p h t (t x)
+int2bin x = reverse (unfold (==0) (`mod` 2) (`div` 2) x)
 
 --exercise 5
 --takes two function and alternately applies them 
 altMap :: (a -> b) -> (a -> b) -> [a] -> [b]
 altMap f g [] = []
-altMap f g (x:xs) = f(x) : altaltMap f g xs
-altaltMap :: (a -> b) -> (a -> b) -> [a] -> [b]
-altaltMap f g [] = []
-altaltMap f g (x:xs) = g(x) : altMap f g xs
+altMap f g (x:xs) = f x : altMap g f xs
   
 --exercise 7
 --constructs a balanced binary tree from the given list
@@ -64,3 +74,26 @@ insert x (Node tree1 value tree2)
     | x == value = Node tree1 value tree2
     | x < value = Node (insert x tree1) value tree2
     | x > value = Node tree1 value (insert x tree2)
+
+--exercise 8
+data Nat = Zero | Succ Nat deriving (Eq,Ord,Show,Read)
+--sees if a natural number is even 
+evenn :: Nat -> Bool
+evenn (Zero) = True
+evenn (Succ x) = not (evenn x)
+--sees if a natural number is odd
+oddd :: Nat -> Bool
+oddd (Zero) = False
+oddd (Succ x) = not (oddd x)
+--adds natural numbers
+addd :: Nat -> Nat -> Nat
+addd Zero Zero = Zero
+addd Zero x = x
+addd x Zero = x
+addd (Succ x) (Succ y) = addd x (Succ(Succ y))
+--multiplies natural numbers
+multt :: Nat -> Nat -> Nat
+multt Zero Zero = Zero
+multt Zero x = Zero
+multt x Zero = Zero
+multt (Succ x) y = addd y (multt x y)

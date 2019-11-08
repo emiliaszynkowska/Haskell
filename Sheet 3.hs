@@ -1,5 +1,4 @@
 import qualified Data.List as S
-
 --exercise 1
 --calculates the sum of squares of odd numbers, and cubes of even numbers, for the first 100 integers
 sum100Integers :: Int
