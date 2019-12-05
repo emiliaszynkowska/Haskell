@@ -1,6 +1,6 @@
 module Exercises (longestCommonSubsequence) where
 
---exercise A3
+--exercise 3
 --when given a list of lists xss, returns the longest subsequence of these lists
 longestCommonSubsequence :: Eq a => [[a]] -> [a]
 longestCommonSubsequence [] = []

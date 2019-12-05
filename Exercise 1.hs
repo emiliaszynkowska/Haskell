@@ -1,6 +1,6 @@
 module Exercises (histogram) where
 
---exercise A1
+--exercise 1
 --returns a list that counts the frequency of values drawn from xs in the ranges 0..n-1, n..2n-1, 2n..3n-1 and so on, until all values in xs have been counted
 --e.g. histogram 5 [1, 2, 10, 4, 7, 12] = [3, 1, 2]
 histogram :: Int -> [Int] -> [Int]

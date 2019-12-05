@@ -1,6 +1,6 @@
 module Exercises (approxSqrt) where
 
---exercise A2
+--exercise 2
 --returns the square root using the Babylonian method
 --stops when (d-c < epsilon) and returns the result
 approxSqrt :: Double -> Double -> Double

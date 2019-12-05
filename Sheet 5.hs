@@ -51,14 +51,6 @@ getForm (Imply x y)
     | getForm x == Negative = Positive
     | otherwise = Neither
 
---exercise 5
--- data Pair a b = P (a, b)
--- data Fun a b = F (a -> b)
-
--- instance Functor (Pair a) where
---     fmap :: (a -> b) -> f a -> f b
---     fmap f (P x y) = Pair (f x) (f y)  
-
 --exercise 6
 data Tree2 a = Leaf2 a | Node2 (Tree2 a) (Tree2 a) deriving Show
 data Direction a = L (Tree2 a) | R (Tree2 a) deriving Show
@@ -129,7 +121,8 @@ isReachable :: Int -> Int -> Bool
 isReachable x y 
     | x == 0 && y /= 1 = False
     | elem (x,y) (edges makeNodeGraph) = True
-    | elem (x,x+1) (edges makeNodeGraph) = False
+    | elem (x,x+1) (edges makeNodeGraph) = isReachable (x+1) y
+    | elem (x, x `div` 5) (edges makeNodeGraph) = isReachable (x `div` 5) y
     | otherwise = False
 
 
