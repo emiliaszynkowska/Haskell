@@ -1,11 +1,19 @@
---graphs
-
+import Data.List
+import Data.Array
+import Data.Graph
+import Data.Graph.Inductive.Graph
+-------------------------------------------------------------------
 --graphs using inxdexed collections of nodes and edges
 type Vertex = Int
 type Edge = (Vertex, Vertex)
 type Table a = Array Vertex a
 type Graph = Table [Vertex]
 
+makeGraph = buildG (0,1000) (listOfEdges 0)
+listOfEdges n
+    | n == 1000 = []
+    | otherwise = (n,n+1) : listOfEdges (n+1)
+-------------------------------------------------------------------
 --graphs using cyclic dependencies
 data List a = Empty | Node a (List a) (List a)
 
@@ -22,7 +30,7 @@ data Graph a = GNode a (Graph a)
 makeGraph :: [(a,Int)] -> Graph a
 makeGraph xys = table !! 0
     where table = map (\(x,ns) -> GNode x (map (table !!) ns)) xys
-
+-------------------------------------------------------------------
 --inductive graphs
 empty :: Graph a b
 embed :: Context a b -> Graph a b -> Graph a b
@@ -36,6 +44,9 @@ type Decomp a b -> (Maybe (Context a b), Graph a b)
 gmap :: (Context a b) -> (Context c b) -> Graph a b -> Graph c b
 gmap f g 
     | isEmpty g = empty
-    | otherwise = embed (f c) (gmap f g’)
-    where (c,g’) = matchAny g 
+    | otherwise = embed (f c) (gmap f g')
+    where (c,g') = matchAny g 
+-------------------------------------------------------------------
+
+
 

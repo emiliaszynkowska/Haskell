@@ -1,4 +1,4 @@
--- COMP2209 Functional Programming Challenges
+-- comp2209 Functional Programming Challenges
 -- (c) University of Southampton 2019
 -- Sample tests by Andy Gravell, Julian Rathke
 -- DO NOT RE-DISTRIBUTE OR RE-POST
@@ -10,10 +10,10 @@ import Parsing
 import Challenges
 
 -- Main program
-
+--
 -- There is one simple test suite per exercise, each a list of assertions
 -- These are only the published tests -- further, unseen tests will also be applied
-
+--
 simpleTests :: [[Bool]]
 simpleTests =
     [ -- Challenge 1
@@ -22,8 +22,7 @@ simpleTests =
         alphaNorm (LamAbs 0 (LamAbs 1 (LamVar 0))) == LamAbs 0 (LamAbs 1 (LamVar 0)),
         alphaNorm (LamAbs 1 (LamAbs 0 (LamVar 1))) == LamAbs 0 (LamAbs 1 (LamVar 0)),
         alphaNorm (LamAbs 1 (LamAbs 0 (LamVar 0))) == LamAbs 0 (LamAbs 0 (LamVar 0)),
-        alphaNorm (LamAbs 0 (LamAbs 1 (LamAbs 2 (LamVar 0)))) == 
-            LamAbs 0 (LamAbs 1 (LamAbs 1 (LamVar 0)))
+        alphaNorm (LamAbs 0 (LamAbs 1 (LamAbs 2 (LamVar 0)))) == LamAbs 0 (LamAbs 1 (LamAbs 1 (LamVar 0)))
       ],
       [ -- Challenge 2
         countAllReds (LamAbs 0 (LamAbs 1 (LamVar 1))) 0 == 0,

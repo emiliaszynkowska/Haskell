@@ -1,5 +1,6 @@
-pure :: a -> f a
-(<*>) :: f (a -> b) -> f a -> f b
+class (Functor f) => Applicative f where
+    pure :: a -> f a
+    (<*>) :: f (a -> b) -> f a -> f b
 
 --Applicative and Maybe
 instance Applicative Maybe where
@@ -13,5 +14,7 @@ instance Applicative [] where
   pure a = [a]
   fs <*> xs = [f x | f <- fs, x <- xs]
 
---e.g. pure (4 +) <*> [1,2,3] 
---= [5,6,7]
+example1 = (+) <$> (Just 1) <*> (Just 2) 
+example2 = [(+3),(+100),(*3)] <*> [3,4,5]
+example3 = [(+),(^)] <*> [1,2] <*> [3,4]
+
