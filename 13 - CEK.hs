@@ -2,7 +2,7 @@ module CEK where
 
 --C   --Control
 --E   --Environment
---(S) --Store
+--S   --Store
 --K   --Continuation
 
 data Exp = Var String | Lam String Exp | App Exp Exp deriving Show
